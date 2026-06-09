@@ -35,7 +35,11 @@ public class CandidateController {
         return ResponseEntity.ok(candidates);
     }
 
-
+    @GetMapping("/search/name/{name}")
+    public ResponseEntity<List<Candidate>> getCandidateName(@PathVariable String name){
+        List<Candidate> searchResults = candidateService.searchByName(name);
+        return ResponseEntity.ok(searchResults);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Candidate> getCandidateById(@PathVariable Long id) {
