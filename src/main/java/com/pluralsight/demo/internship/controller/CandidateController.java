@@ -1,12 +1,14 @@
 package com.pluralsight.demo.internship.controller;
 
 import com.pluralsight.demo.internship.model.Candidate;
+import com.pluralsight.demo.internship.repository.CandidateRepository;
 import com.pluralsight.demo.internship.service.CandidateService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/candidates")
@@ -20,10 +22,20 @@ public class CandidateController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Candidate>> getAllCandidates() {
-        List<Candidate> candidates = candidateService.getAllCandidates();
+    public ResponseEntity<List<Candidate>> getAllCandidates(
+            @RequestParam(required = false)String fieldOfStudy) {
+
+        List<Candidate> candidates;
+
+        if (fieldOfStudy != null){
+            candidates = candidateService.getCandidatesByFieldOfStudy(fieldOfStudy);
+        }else{
+            candidates = candidateService.getAllCandidates();
+        }
         return ResponseEntity.ok(candidates);
     }
+
+
 
     @GetMapping("/{id}")
     public ResponseEntity<Candidate> getCandidateById(@PathVariable Long id) {

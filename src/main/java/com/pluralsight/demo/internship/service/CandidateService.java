@@ -5,6 +5,7 @@ import com.pluralsight.demo.internship.repository.CandidateRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CandidateService {
@@ -17,6 +18,12 @@ public class CandidateService {
 
     public List<Candidate> getAllCandidates() {
         return candidateRepository.findAll();
+    }
+
+    public List<Candidate> getCandidatesByFieldOfStudy(String fieldOfStudy){
+        return candidateRepository.findAll().stream()
+                .filter(c -> c.getFieldOfStudy().equalsIgnoreCase(fieldOfStudy))
+                .collect(Collectors.toList());
     }
 
     public Candidate getCandidateById(Long id) {
