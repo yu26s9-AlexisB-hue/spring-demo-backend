@@ -31,6 +31,11 @@ public class CandidateService {
                 .collect(Collectors.toList());
     }
 
+    public List<Candidate> searchByEmail(String email){
+        return candidateRepository.findAll().stream().filter(i -> i.getEmail()
+                .contains(email)).collect(Collectors.toList());
+    }
+
     public Candidate getCandidateById(Long id) {
         // Same flaw as InternshipService for consistency
         return candidateRepository.findById(id)
