@@ -12,9 +12,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -74,6 +74,31 @@ class CandidateControllerTest {
                 .andExpect(jsonPath("$.name").value("Freddy Krueger"))
                 .andExpect(jsonPath("$.email").value("dreamstalker@gmail.com"))
                 .andExpect(jsonPath("$.fieldOfStudy").value("Neuroscience"));
+    }
+
+    @Test
+    void deleteCandidate_shouldReturnNoContent() throws Exception{
+        Long id = 5L;
+        doNothing().when(candidateService).deleteCandidate(id);
+
+        mockMvc.perform(delete("/api/candidates/{id}", id))
+                .andExpect(status().isNoContent());
+
+        verify(candidateService, times(1)).deleteCandidate(id);
+    }
+
+    @Test
+    void getCandidateById_shouldReturnCandidates() throws Exception{
+        Candidate idCandidate = new Candidate("Michael Myers", "Haddonfield1031@gmail.com","Slicing Software");
+        idCandidate.setId(6L);
+
+        when(candidateService.getCandidateById(anyLong())).thenReturn(idCandidate);
+
+        mockMvc.perform(get("/api/candidates/{id}",6))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value("Michael Myers"))
+                .andExpect(jsonPath("$.email").value("Haddonfield1031@gmail.com"))
+                .andExpect(jsonPath("$.fieldOfStudy").value("Slicing Software"));
     }
 
 }
