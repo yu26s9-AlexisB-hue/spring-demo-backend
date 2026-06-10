@@ -30,12 +30,15 @@ class CandidateControllerTest {
     void getAllCandidates_shouldReturnListOfCandidates() throws Exception{
         Candidate candidate = new Candidate("Jason Voorhees", "CrystalLakeBlues@yahoo.com","Slicing Software");
         candidate.setId(1L);
+        candidate.setVisible(true);
 
         Candidate candidate2 = new Candidate("Ellen Ripley", "ripley.nostromo@gmail.com", "Weyland-Yutani Systems");
         candidate2.setId(2L);
+        candidate2.setVisible(false);
 
         Candidate candidate3 = new Candidate("Sarah Connor", "sconnor1984@yahoo.com", "Skynet Defense Solutions");
         candidate3.setId(3L);
+        candidate3.setVisible(true);
 
         List<Candidate> candidates = Arrays.asList(candidate,candidate2,candidate3);
 
@@ -58,6 +61,7 @@ class CandidateControllerTest {
 
         Candidate savedCandidate = new Candidate("Freddy Krueger", "dreamstalker@gmail.com", "Neuroscience");
         savedCandidate.setId(4L);
+        savedCandidate.setVisible(false);
 
         when(candidateService.createCandidate(any(Candidate.class))).thenReturn(savedCandidate);
 
@@ -91,6 +95,7 @@ class CandidateControllerTest {
     void getCandidateById_shouldReturnCandidates() throws Exception{
         Candidate idCandidate = new Candidate("Michael Myers", "Haddonfield1031@gmail.com","Slicing Software");
         idCandidate.setId(6L);
+        idCandidate.setVisible(true);
 
         when(candidateService.getCandidateById(anyLong())).thenReturn(idCandidate);
 
