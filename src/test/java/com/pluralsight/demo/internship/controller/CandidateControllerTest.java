@@ -11,6 +11,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -54,7 +55,25 @@ class CandidateControllerTest {
 
     @Test
     void createCandidate_shouldReturnCreatedCandidate() throws Exception{
-        Candidate candidate
+
+        Candidate savedCandidate = new Candidate("Freddy Krueger", "dreamstalker@gmail.com", "Neuroscience");
+        savedCandidate.setId(4L);
+
+        when(candidateService.createCandidate(any(Candidate.class))).thenReturn(savedCandidate);
+
+        mockMvc.perform(post("/api/candidates").contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                        {
+                        "name": "Freddy Krueger",
+                        "email": "dreamstalker@gmail.com",
+                        "fieldOfStudy": "Neuroscience"
+                        }
+                        """))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(4))
+                .andExpect(jsonPath("$.name").value("Freddy Krueger"))
+                .andExpect(jsonPath("$.email").value("dreamstalker@gmail.com"))
+                .andExpect(jsonPath("$.fieldOfStudy").value("Neuroscience"));
     }
 
 }

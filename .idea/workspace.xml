@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="443b38bb-22d9-4f63-aad8-be12c22cab85" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/pluralsight/demo/internship/controller/CandidateControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/pluralsight/demo/internship/controller/CandidateControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/pluralsight/demo/internship/controller/CandidateControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +54,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "JUnit.CandidateControllerTest.createCandidate_shouldReturnCreatedCandidate.executor": "Run",
     "JUnit.CandidateControllerTest.getAllCandidates_shouldReturnListOfCandidates.executor": "Run",
     "JUnit.InternshipControllerTest.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
@@ -79,7 +80,23 @@
       <recent name="com.pluralsight.demo.internship.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.CandidateControllerTest.getAllCandidates_shouldReturnListOfCandidates">
+  <component name="RunManager" selected="JUnit.CandidateControllerTest.createCandidate_shouldReturnCreatedCandidate">
+    <configuration name="CandidateControllerTest.createCandidate_shouldReturnCreatedCandidate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="spring-demo-backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.pluralsight.demo.internship.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.pluralsight.demo.internship.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.pluralsight.demo.internship.controller.CandidateControllerTest" />
+      <option name="METHOD_NAME" value="createCandidate_shouldReturnCreatedCandidate" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="CandidateControllerTest.getAllCandidates_shouldReturnListOfCandidates" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="spring-demo-backend" />
       <extension name="coverage">
@@ -127,6 +144,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CandidateControllerTest.createCandidate_shouldReturnCreatedCandidate" />
         <item itemvalue="JUnit.CandidateControllerTest.getAllCandidates_shouldReturnListOfCandidates" />
         <item itemvalue="Spring Boot.InternshipManagerApplication" />
         <item itemvalue="JUnit.InternshipControllerTest" />
