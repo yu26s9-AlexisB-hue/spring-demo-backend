@@ -1,0 +1,60 @@
+package com.pluralsight.demo.internship.controller;
+
+import com.pluralsight.demo.internship.model.Candidate;
+import com.pluralsight.demo.internship.service.CandidateService;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.web.servlet.MockMvc;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+@WebMvcTest(CandidateController.class)
+class CandidateControllerTest {
+    @Autowired
+    private MockMvc mockMvc;
+
+    @MockitoBean
+    private CandidateService candidateService;
+
+    @Test
+    void getAllCandidates_shouldReturnListOfCandidates() throws Exception{
+        Candidate candidate = new Candidate("Jason Voorhees", "CrystalLakeBlues@yahoo.com","Slicing Software");
+        candidate.setId(1L);
+
+        Candidate candidate2 = new Candidate("Ellen Ripley", "ripley.nostromo@gmail.com", "Weyland-Yutani Systems");
+        candidate2.setId(2L);
+
+        Candidate candidate3 = new Candidate("Sarah Connor", "sconnor1984@yahoo.com", "Skynet Defense Solutions");
+        candidate3.setId(3L);
+
+        List<Candidate> candidates = Arrays.asList(candidate,candidate2,candidate3);
+
+        when(candidateService.getAllCandidates()).thenReturn(candidates);
+
+        mockMvc.perform(get("/api/candidates").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$[0].name").value("Jason Voorhees"))
+                .andExpect(jsonPath("$[0].email").value("CrystalLakeBlues@yahoo.com"))
+                .andExpect(jsonPath("$[1].name").value("Ellen Ripley"))
+                .andExpect(jsonPath("$[1].fieldOfStudy").value("Weyland-Yutani Systems"))
+                .andExpect(jsonPath("$[2].email").value("sconnor1984@yahoo.com"))
+                .andExpect(jsonPath("$[2].fieldOfStudy").value("Skynet Defense Solutions"))
+                .andExpect(jsonPath("$.length()").value(3));
+
+
+    }
+
+    @Test
+    void createCandidate_shouldReturnCreatedCandidate() throws Exception{
+        Candidate candidate
+    }
+
+}
